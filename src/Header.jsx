@@ -1,9 +1,10 @@
 import "./Header.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ListItem from "./ListItem";
 
 const Header = ({ todoListSetter }) => {
   const [todoDesc, setTodoText] = useState();
+  const todoInputRef = useRef();
 
   function handleAddClick() {
     if (todoDesc === "") {
@@ -20,6 +21,7 @@ const Header = ({ todoListSetter }) => {
     );
 
     setTodoText((prevDesc) => (prevDesc = ""));
+    todoInputRef.current.value = "";
   }
 
   function handleTodoDescOnChange(e) {
@@ -29,6 +31,7 @@ const Header = ({ todoListSetter }) => {
   return (
     <header className="header">
       <input
+      ref={todoInputRef}
         onChange={handleTodoDescOnChange}
         type="text"
         placeholder="Enter your to-do..."
