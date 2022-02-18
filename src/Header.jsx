@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import ListItem from "./ListItem";
 
 const Header = ({ todoListSetter }) => {
-  const [todoDesc, setTodoText] = useState();
+  const [todoDesc, setTodoDesc] = useState();
   const todoInputRef = useRef();
 
   function handleAddClick() {
@@ -11,21 +11,25 @@ const Header = ({ todoListSetter }) => {
       return;
     }
 
+    //Add new todo to the array
     todoListSetter(
       (prevList) =>
         (prevList = [...prevList, {id: prevList.length+1, desc: todoDesc, complete: false }])
     );
 
+    //Map array values to ListItems component
     todoListSetter((prevList) =>
-      prevList.map((item) => <ListItem key={item.id} item={item}  />)
+      prevList.map((item) => <ListItem key={item.id} item={item} todoList={prevList} setTodoList = {todoListSetter}  />)
     );
 
-    setTodoText((prevDesc) => (prevDesc = ""));
+    //Clean the state var and the value in the input
+    setTodoDesc((prevDesc) => (prevDesc = ""));
     todoInputRef.current.value = "";
   }
 
+  //Update the state with the input value
   function handleTodoDescOnChange(e) {
-    setTodoText((prevDesc) => (prevDesc = e.target.value));
+    setTodoDesc((prevDesc) => (prevDesc = e.target.value));
   }
 
   return (
