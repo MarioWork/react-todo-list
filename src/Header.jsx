@@ -1,26 +1,33 @@
 import "./Header.css";
 import { useState, useRef } from "react";
-import ListItem from "./ListItem";
 
-const Header = ({ todoListSetter }) => {
+const Header = ({ todoList, setTodoList }) => {
   const [todoDesc, setTodoDesc] = useState();
   const todoInputRef = useRef();
 
   function handleAddClick() {
-    if (todoDesc === "") {
+    if (todoDesc === "" || todoDesc === undefined) {
       return;
     }
 
-    //Add new todo to the array
-    todoListSetter(
-      (prevList) =>
-        (prevList = [...prevList, {id: prevList.length+1, desc: todoDesc, complete: false }])
-    );
+    let tempTodoList = todoList;
 
-    //Map array values to ListItems component
-    todoListSetter((prevList) =>
-      prevList.map((item) => <ListItem key={item.id} item={item} todoList={prevList} setTodoList = {todoListSetter}  />)
-    );
+    //Create new todo object
+    let newTodo = {
+      id: tempTodoList.length + 1,
+      desc: todoDesc,
+      complete: false,
+    };
+
+    //Add the new todo as a ListItem component
+    tempTodoList = [
+      ...tempTodoList,
+      newTodo
+    ];
+
+
+    //Update the todoList state
+    setTodoList((prevList) => (prevList = tempTodoList));
 
     //Clean the state var and the value in the input
     setTodoDesc((prevDesc) => (prevDesc = ""));
@@ -35,7 +42,7 @@ const Header = ({ todoListSetter }) => {
   return (
     <header className="header">
       <input
-      ref={todoInputRef}
+        ref={todoInputRef}
         onChange={handleTodoDescOnChange}
         type="text"
         placeholder="Enter your to-do..."

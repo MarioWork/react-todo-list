@@ -2,33 +2,30 @@ import React from "react";
 import "./ListItem.css";
 
 function ListItem({ item, todoList, setTodoList }) {
+
+  
   function handleCardClick() {
-    let tempTodoList = todoList;
-
-    //Find the item index
-    let index = tempTodoList.findIndex((_item) => _item.id === item.id);
-
-    //Change the complete property to the inverse
-    tempTodoList[index].complete = !tempTodoList[index].complete;
-
-    //Map the items of the list to a Listitem component
-    let mappedList = tempTodoList.map((item) => (
-      <ListItem
-        key={item.id}
-        item={item}
-        todoList={todoList}
-        setTodoList={setTodoList}
-      />
+    let tempList = todoList;
+  
+    //Find the index of the item in question
+    let index = tempList.findIndex(_item => _item.id === item.id);
+  
+    //Invert the completion of the task
+    tempList[index].complete = !tempList[index].complete;
+    
+    //Update the list
+    setTodoList((prevList) => (
+      prevList = [...tempList]
     ));
-
-    //Update the todoList state
-    setTodoList((prevList) => (prevList = mappedList));
   }
 
+  //JSX Return
   return (
-    <div className="card" onClick={handleCardClick}>
+    <div
+      className={item.complete ? "card text-decor-line" : "card"}
+      onClick={handleCardClick}
+    >
       <p>{item.desc}</p>
-      <p>{item.complete ? "Complete" : "Uncomplete"}</p>
     </div>
   );
 }

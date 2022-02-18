@@ -7,10 +7,18 @@ const App = () => {
   const [todoList, setTodoList] = useState([]);
 
   return (
-    <>
-      <Header todoListSetter={setTodoList} />
-      {todoList}
-    </>
+    <div className="container">
+      <h1>React Todo List App</h1>
+      <Header todoList={todoList} setTodoList={setTodoList} />
+      {todoList.map((item) => (
+        <ListItem
+          key={item.id}
+          item={item}
+          todoList={todoList}
+          setTodoList={setTodoList}
+        />
+      ))}
+    </div>
   );
 };
 
