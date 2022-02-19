@@ -1,7 +1,7 @@
 import "./Header.css";
 import { useState, useRef } from "react";
 
-const Header = ({ todoList, setTodoList }) => {
+const Header = ({ todoList, setTodoList, setFilterValue }) => {
   const [todoDesc, setTodoDesc] = useState();
   const todoInputRef = useRef();
 
@@ -20,11 +20,7 @@ const Header = ({ todoList, setTodoList }) => {
     };
 
     //Add the new todo as a ListItem component
-    tempTodoList = [
-      ...tempTodoList,
-      newTodo
-    ];
-
+    tempTodoList = [...tempTodoList, newTodo];
 
     //Update the todoList state
     setTodoList((prevList) => (prevList = tempTodoList));
@@ -39,6 +35,11 @@ const Header = ({ todoList, setTodoList }) => {
     setTodoDesc((prevDesc) => (prevDesc = e.target.value));
   }
 
+  //Update the state of the filterValue
+  function handleFilterSelection(e) {
+    setFilterValue((prevValue) => (prevValue = e.target.value));
+  }
+
   return (
     <header className="header">
       <input
@@ -50,7 +51,7 @@ const Header = ({ todoList, setTodoList }) => {
       <button className="button" onClick={handleAddClick}>
         Add
       </button>
-      <select className="custom-select">
+      <select className="custom-select" onChange={handleFilterSelection}>
         <option value="0">All</option>
         <option value="1">Completed</option>
         <option value="2">Uncompleted</option>
