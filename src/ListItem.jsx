@@ -22,7 +22,7 @@ function ListItem({ item, todoList, setTodoList }) {
   //JSX Return
   return (
     <div
-      className={item.complete ? "card text-decor-line" : "card"}
+      className={item.complete ? "card card-task-complete" : "card"}
       onClick={handleCardClick}
     >
       <p>{item.desc}</p>

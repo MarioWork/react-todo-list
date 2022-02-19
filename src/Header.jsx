@@ -50,6 +50,11 @@ const Header = ({ todoList, setTodoList }) => {
       <button className="button" onClick={handleAddClick}>
         Add
       </button>
+      <select className="custom-select">
+        <option value="0">All</option>
+        <option value="1">Completed</option>
+        <option value="2">Uncompleted</option>
+      </select>
     </header>
   );
 };

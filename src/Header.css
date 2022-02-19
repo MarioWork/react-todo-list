@@ -37,3 +37,10 @@ select {
   box-sizing: border-box;
   transition: 0.3s;
 }
+
+.custom-select{
+  margin-left: 1em;
+  width: 300px;
+  padding: 1em;
+  font-size: 1em;
+}

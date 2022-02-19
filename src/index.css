@@ -6,9 +6,11 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   display: flex;
+  height: 100vh;
   align-items: center;
   justify-content: center;
   font-family: 'Open Sans', sans-serif;
+  background: linear-gradient(208deg, rgba(26,143,231,1) 0%, rgba(9,98,247,1) 100%);
 }
 
 
